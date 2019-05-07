@@ -478,12 +478,12 @@ export class Container {
    * @param  {Object}   opts  Query params in the request (optional)
    * @return {Promise}          Promise returning the stats, in a stream or string
    */
-  stats (opts?: Object): Promise<Object> {
+  stats (opts?: Object = {}): Promise<Object> {
     const call = {
       path: `/containers/${this.id}/stats?`,
       method: 'GET',
       options: opts,
-      isStream: true,
+      isStream: (opts.stream !== undefined) ? opts.stream : true,
       statusCodes: {
         200: true,
         404: 'no such container',
